@@ -1,0 +1,57 @@
+{
+  "name": "aozora-converter",
+  "productName": "aozora-converter",
+  "version": "0.1.0",
+  "description": "wav to m4a converter",
+  "main": "build/aozoraconverter.js",
+  "scripts": {
+    "build": "tsc && chcp 65001",
+    "start": "npm run build && electron .",
+    "build-win": "npm run build && electron-builder --win --x64"
+  },
+  "keywords": [],
+  "author": {
+    "name": "numthree-uchimura (https://github.com/N3-uchimura/)",
+    "email": "uchimura@numthree.net"
+  },
+  "dependencies": {
+    "electron-log": "^5.4.0",
+    "fluent-ffmpeg": "^2.1.3",
+    "node-cache": "^5.1.2"
+  },
+  "devDependencies": {
+    "@types/fluent-ffmpeg": "^2.1.27",
+    "@types/node": "^20.19.9",
+    "electron": "^38.5.0",
+    "electron-builder": "^26.0.12"
+  },
+  "build": {
+    "appId": "net.numthree.aozoraconverter",
+    "productName": "aozoraconverter",
+    "files": [
+      "build/**/*",
+      "package.json",
+      "!dist/**/*",
+      "!src/**/*",
+      "!.gitignore",
+      "!.vscode"
+    ],
+    "extraResources": [
+      "assets",
+      "www/**/*"
+    ],
+    "squirrelWindows": {},
+    "directories": {
+      "buildResources": "assets",
+      "output": "dist"
+    },
+    "win": {
+      "target": "nsis",
+      "icon": "assets/aozora1.png"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    }
+  }
+}
