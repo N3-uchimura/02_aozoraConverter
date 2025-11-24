@@ -95,7 +95,9 @@ class ElFfmpeg {
     inputPath: string,
     outputPath: string,
     timeout: number,
-    maxBuffer: number
+    maxBuffer: number,
+    quality: number,
+    samplingrate: number,
   ): Promise<void> {
     return new Promise(async (resolve, reject) => {
       try {
@@ -106,8 +108,10 @@ class ElFfmpeg {
           inputPath,
           "-c:a",
           "aac",
+          "-ar",
+          `${samplingrate}`,
           "-b:a",
-          "96k",
+          `${quality}k`,
           outputPath,
         ];
 

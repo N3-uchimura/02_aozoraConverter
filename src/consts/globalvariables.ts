@@ -10,7 +10,7 @@ export namespace myConst {
   export const DEVMODE: boolean = true;
   export const COMPANY_NAME: string = "nthree";
   export const APP_NAME: string = "aozoraconverter";
-  export const LOG_LEVEL: string = "all";
+  export const LOG_LEVEL: string = "debug";
   export const DEFAULT_ENCODING: string = "utf8";
 }
 

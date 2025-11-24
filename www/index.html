@@ -19,11 +19,18 @@
   <p><i class="arrow down"></i></p>
   <div class="operation_area">
     <h3 id="converter">Convert</h3>
+    <label id="qualitylabel" for="quality">quality</label>
+    <input type="number" id="quality" name="quality" min="48" max="320" value="128" /><br><br>
+    <label id="samplingratelabel" for="samplingrate">sampling rate</label>
+    <select name="samplingrate" id="samplingrate">
+      <option value="11025">11025 Hz</option>
+      <option value="22050">22050 Hz</option>
+      <option value="44100" selected>44100 Hz</option>
+      <option value="88200">88200 Hz</option>
+      <option value="96000">96000 Hz</option>
+      <option value="192000">192000 Hz</option>
+    </select><br><br>
     <button id="convert_button" class="button-g button-wide" value="convert" onclick="gotoConvert();">Convert</button>
-  </div>
-  <div class="operation_area">
-    <h3 id="delete">Clean</h3>
-    <button id="delete_button" class="button-g button-wide" value="delete" onclick="gotoDelete();">Clean</button>
   </div>
   <div class="config_area">
     <h3 id="config">Config</h3>
@@ -48,16 +55,18 @@
     // japanese
     const APPNAME_STR_JA = '青空コンバータ';
     const SELECTDIR_STR_JA = 'フォルダ選択';
+    const QUALITY_STR_JA = '音声品質';
+    const SAMPLINGRATE_STR_JA = 'サンプリング周波数';
     const CONVERT_STR_JA = 'ファイル変換';
-    const DELETE_STR_JA = 'クリア';
     const STATUS_STR_JA = 'ステータス';
     const CONFIG_STR_JA = '設定';
     const EXIT_STR_JA = '終了';
     // english
     const APPNAME_STR_EN = 'Aozora Converter';
     const SELECTDIR_STR_EN = 'Select Directory';
+    const QUALITY_STR_EN = 'quality';
+    const SAMPLINGRATE_STR_EN = 'sampling rate';
     const CONVERT_STR_EN = 'Convert';
-    const DELETE_STR_EN = 'Delete';
     const STATUS_STR_EN = 'Status';
     const CONFIG_STR_EN = 'Config';
     const EXIT_STR_EN = 'Exit';
@@ -67,8 +76,10 @@
     const selectdirButtonDom = document.getElementById('selectdir_button');
     const convertDom = document.getElementById('convert');
     const convertButtonDom = document.getElementById('convert_button');
-    const deleteDom = document.getElementById('delete');
-    const deleteButtonDom = document.getElementById('delete_button');
+    const qualitylabelDom = document.getElementById('qualitylabel');
+    const qualityDom = document.getElementById('quality');
+    const samplingratelabelDom = document.getElementById('samplingratelabel');
+    const samplingrateDom = document.getElementById('samplingrate');
     const statusDom = document.getElementById('status');
     const errorDom = document.getElementById('error');
     const statusHeadDom = document.getElementById('statushead');
@@ -136,21 +147,12 @@
     const gotoConvert = () => {
       try {
         console.log('converting');
+        const sendobj = {
+          quality: qualityDom.value,
+          rate: samplingrateDom.value,
+        }
         // convert
-        window.api.send('convert');
-
-      } catch (e) {
-        // error
-        console.log(e);
-      }
-    }
-
-    // start deleting
-    const gotoDelete = () => {
-      try {
-        console.log('deleting');
-        // delete
-        window.api.send('delete');
+        window.api.send('convert', sendobj);
 
       } catch (e) {
         // error
@@ -192,10 +194,10 @@
         maintitleDom.innerHTML = APPNAME_STR_JA;
         selectdirDom.innerHTML = SELECTDIR_STR_JA;
         selectdirButtonDom.innerHTML = SELECTDIR_STR_JA;
+        qualitylabelDom.innerHTML = QUALITY_STR_JA;
+        samplingratelabelDom.innerHTML = SAMPLINGRATE_STR_JA;
         convertDom.innerHTML = CONVERT_STR_JA;
         convertButtonDom.innerHTML = CONVERT_STR_JA;
-        deleteDom.innerHTML = DELETE_STR_JA;
-        deleteButtonDom.innerHTML = DELETE_STR_JA;
         statusHeadDom.innerHTML = STATUS_STR_JA;
         configDom.innerHTML = CONFIG_STR_JA;
         configButtonDom.innerHTML = CONFIG_STR_JA;
@@ -207,10 +209,10 @@
         maintitleDom.innerHTML = APPNAME_STR_EN;
         selectdirDom.innerHTML = SELECTDIR_STR_EN;
         selectdirButtonDom.innerHTML = SELECTDIR_STR_EN;
+        qualitylabelDom.innerHTML = QUALITY_STR_EN;
+        samplingratelabelDom.innerHTML = SAMPLINGRATE_STR_EN;
         convertDom.innerHTML = CONVERT_STR_EN;
         convertButtonDom.innerHTML = CONVERT_STR_EN;
-        deleteDom.innerHTML = DELETE_STR_EN;
-        deleteButtonDom.innerHTML = DELETE_STR_EN;
         statusHeadDom.innerHTML = STATUS_STR_EN;
         configDom.innerHTML = CONFIG_STR_EN;
         configButtonDom.innerHTML = CONFIG_STR_EN;

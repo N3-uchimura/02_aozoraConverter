@@ -277,7 +277,7 @@ ipcMain.on('selectdir', async (_, __) => {
 });
 
 // convert
-ipcMain.on('convert', async (_, __) => {
+ipcMain.on('convert', async (event: any, arg: any) => {
   try {
     logger.info('app: convert app');
     // language
@@ -286,16 +286,31 @@ ipcMain.on('convert', async (_, __) => {
     const targetPath: string = cacheMaker.get('path') ?? '';
     // output dir path
     const outputDir: string = path.join(fileRootPath, 'output');
+    // quality
+    const quality: number = Number(arg.quality) ?? 128;
+    // rate
+    const rate: number = Number(arg.rate) ?? 44100;
     // file list in subfolder
     const audioFiles: string[] = (await readdir(targetPath)).filter((ad: string) => path.parse(ad).ext == '.wav');
     // operate each
-    for await (const audioname of audioFiles) {
-      // original wav path
-      const originalWavPath: string = path.join(targetPath, audioname);
-      // partial output path
-      const partialFinalPath: string = path.join(outputDir, `${path.parse(audioname).name}.m4a`);
-      // convert to m4a
-      await ffmpegManager.convertAudioToM4a(originalWavPath, partialFinalPath, 10000, 100000);
+    for await (const [index, audioname] of Object.entries(audioFiles)) {
+      try {
+        // original wav path
+        const originalWavPath: string = path.join(targetPath, audioname);
+        // partial output path
+        const partialFinalPath: string = path.join(outputDir, `${path.parse(audioname).name}.m4a`);
+        // convert to m4a
+        await ffmpegManager.convertAudioToM4a(originalWavPath, partialFinalPath, 10000, 100000, quality, rate);
+      } catch (err: unknown) {
+        logger.error(err);
+
+      } finally {
+        // URL
+        event.sender.send('statusUpdate', {
+          status: `${index}/${audioFiles.length}`,
+          target: `converting ${audioname}...`
+        });
+      }
     }
     // status message
     let finishedMessage: string = '';

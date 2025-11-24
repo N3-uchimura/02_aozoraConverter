@@ -47,6 +47,10 @@ footer {
   margin: 50px 0 30px;
 }
 
+.status_area {
+  font-size: 0.8rem;
+}
+
 .exit_area {
   margin: 30px 0;
 }

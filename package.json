@@ -1,7 +1,7 @@
 {
   "name": "aozora-converter",
   "productName": "aozora-converter",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "wav to m4a converter",
   "main": "build/aozoraconverter.js",
   "scripts": {
