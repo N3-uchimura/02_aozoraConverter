@@ -10,7 +10,7 @@
 
 // define modules
 import { statSync } from 'node:fs'; // file system
-import { execFile } from "child_process";
+import { spawn, execFile, execSync } from "node:child_process";
 import { promisify } from "util";
 
 // ffmpeg class
@@ -102,7 +102,8 @@ class ElFfmpeg {
     return new Promise(async (resolve, reject) => {
       try {
         // arguments
-        const args = [
+        const cmd = [
+          'ffmpeg',
           "-y",
           "-i",
           inputPath,
@@ -114,20 +115,53 @@ class ElFfmpeg {
           `${quality}k`,
           outputPath,
         ];
-
         // exec conversion
-        await ElFfmpeg.execFileAsync("ffmpeg", args, {
-          timeout: timeout,
-          maxBuffer: maxBuffer,
-        });
+        await ElFfmpeg.runCommandWithOutput(
+          cmd,
+          `Extracting chunk`
+        );
         // finish
         resolve();
 
       } catch (e: any) {
         // error
         ElFfmpeg.logger.error(e);
-        resolve();
+        reject();
       }
+    });
+  }
+
+  static runCommandWithOutput(
+    cmd: string[],
+    desc?: string
+  ): Promise<void> {
+    /**
+     * Run a command and stream its output in real-time
+     */
+    if (desc) {
+      console.log(`\n${desc}`);
+    }
+
+    return new Promise((resolve, reject) => {
+      const process: any = spawn(cmd[0], cmd.slice(1), {
+        stdio: ['ignore', 'pipe', 'pipe']
+      });
+
+      process.stdout.on('data', (data: any) => {
+        process.stdout.write(data.toString());
+      });
+
+      process.stderr.on('data', (data: any) => {
+        process.stderr.write(data.toString());
+      });
+
+      process.on('close', (code: any) => {
+        if (code === 0) {
+          resolve();
+        } else {
+          reject(new Error(`Command failed with code ${code}`));
+        }
+      });
     });
   }
 }

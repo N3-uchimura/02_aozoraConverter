@@ -14,7 +14,7 @@ import { myConst, myNums } from './consts/globalvariables';
 import * as path from 'node:path'; // path
 import { existsSync } from 'node:fs'; // file system
 import { readFile, writeFile, readdir } from 'node:fs/promises'; // file system (Promise)
-import { BrowserWindow, app, ipcMain, dialog, Tray, Menu, nativeImage } from 'electron'; // electron
+import { BrowserWindow, app, ipcMain, Tray, Menu, nativeImage } from 'electron'; // electron
 
 import NodeCache from "node-cache"; // node-cache
 import ELLogger from './class/ElLogger'; // logger
@@ -300,7 +300,7 @@ ipcMain.on('convert', async (event: any, arg: any) => {
         // partial output path
         const partialFinalPath: string = path.join(outputDir, `${path.parse(audioname).name}.m4a`);
         // convert to m4a
-        await ffmpegManager.convertAudioToM4a(originalWavPath, partialFinalPath, 10000, 100000, quality, rate);
+        await ffmpegManager.convertAudioToM4a(originalWavPath, partialFinalPath, 10000, 1 * 1024 * 1024 * 1024, quality, rate);
       } catch (err: unknown) {
         logger.error(err);
 
