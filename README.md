@@ -40,9 +40,9 @@ Windows10 ~
 ## Usage
 
 1. Press "Select Direcotry" button and select target directory.
-2. Select "quality" and "sampling rate"(default 128kbps, 44100Hz)
+2. Select "quality" and "sampling rate"(default 92kbps, 44100Hz)
 3. Press "Convert" button.
-4. converted m4a files restored to resources/file/output.
+4. converted m4a files are restored to resources/file/output.
 
 ## Features
 

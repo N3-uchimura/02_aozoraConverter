@@ -287,9 +287,9 @@ ipcMain.on('convert', async (event: any, arg: any) => {
     // output dir path
     const outputDir: string = path.join(fileRootPath, 'output');
     // quality
-    const quality: number = Number(arg.quality) ?? 128;
+    const quality: number = Number(arg.quality) ?? myNums.DEFAULT_QUALITY;
     // rate
-    const rate: number = Number(arg.rate) ?? 44100;
+    const rate: number = Number(arg.rate) ?? myNums.DEFAULT_RATE;
     // file list in subfolder
     const audioFiles: string[] = (await readdir(targetPath)).filter((ad: string) => path.parse(ad).ext == '.wav');
     // operate each
@@ -300,7 +300,7 @@ ipcMain.on('convert', async (event: any, arg: any) => {
         // partial output path
         const partialFinalPath: string = path.join(outputDir, `${path.parse(audioname).name}.m4a`);
         // convert to m4a
-        await ffmpegManager.convertAudioToM4a(originalWavPath, partialFinalPath, 10000, 1 * 1024 * 1024 * 1024, quality, rate);
+        await ffmpegManager.convertAudioToM4a(originalWavPath, partialFinalPath, quality, rate);
       } catch (err: unknown) {
         logger.error(err);
 

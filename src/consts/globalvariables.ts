@@ -18,4 +18,6 @@ export namespace myConst {
 export namespace myNums {
   export const WINDOW_WIDTH: number = 600;
   export const WINDOW_HEIGHT: number = 1000;
+  export const DEFAULT_QUALITY: number = 92;
+  export const DEFAULT_RATE: number = 44100;
 }

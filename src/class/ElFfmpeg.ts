@@ -94,8 +94,6 @@ class ElFfmpeg {
   convertAudioToM4a(
     inputPath: string,
     outputPath: string,
-    timeout: number,
-    maxBuffer: number,
     quality: number,
     samplingrate: number,
   ): Promise<void> {
