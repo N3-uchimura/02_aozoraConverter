@@ -15,6 +15,7 @@
 
 - フォルダ内の WAV ファイルを M4A に全変換します。
 - 品質とサンプリングレートの指定が可能です。
+- 予めffmpeg [ffmpeg download](https://www.ffmpeg.org/download.html).のインストールが必要です。
 
 ## Requirement
 
