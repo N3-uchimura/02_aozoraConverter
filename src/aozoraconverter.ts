@@ -307,7 +307,7 @@ ipcMain.on('convert', async (event: any, arg: any) => {
       } finally {
         // URL
         event.sender.send('statusUpdate', {
-          status: `${index}/${audioFiles.length}`,
+          status: `${Number(index) + 1}/${audioFiles.length}`,
           target: `converting ${audioname}...`
         });
       }
