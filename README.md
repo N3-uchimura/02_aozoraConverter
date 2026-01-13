@@ -15,11 +15,11 @@ aozoraConverter
 
 - This is converter which convert wav to m4a.
 - Quality and sampling rate are configurable.
-- Ffmpeg [ffmpeg download](https://www.ffmpeg.org/download.html) should be installed.
 
 ## Requirement
 
-Windows10 ~
+- Windows10 ~
+- Ffmpeg [ffmpeg](https://www.ffmpeg.org/download.html) should be installed.
 
 ## Setting
 
