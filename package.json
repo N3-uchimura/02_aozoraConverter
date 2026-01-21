@@ -1,7 +1,7 @@
 {
   "name": "aozora-converter",
   "productName": "aozora-converter",
-  "version": "1.0.2",
+  "version": "1.0.3-alpha.1",
   "description": "wav to m4a converter",
   "main": "build/aozoraconverter.js",
   "scripts": {
@@ -20,8 +20,7 @@
   },
   "devDependencies": {
     "@types/node": "^20.19.9",
-    "electron": "^38.5.0",
-    "electron-builder": "^26.0.12"
+    "electron": "^38.5.0"
   },
   "build": {
     "appId": "net.numthree.aozoraconverter",

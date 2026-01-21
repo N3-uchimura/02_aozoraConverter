@@ -41,6 +41,11 @@ aozoraConverter
 
 ## Usage
 
+0. Default root directory is
+
+- all：「C:\Program Files\aozoraeditor」
+- user：「C:\Users\xxxx\AppData\Local\Programs\aozoraeditor」
+
 1. Press "Select Direcotry" button and select target directory.
 2. Select "quality" and "sampling rate"(default 92kbps, 44100Hz)
 3. Press "Convert" button.

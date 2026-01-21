@@ -45,6 +45,11 @@
 
 ## Usage
 
+0. デフォルトのルートフォルダは
+
+- 全体インストール：「C:\Program Files\aozoraeditor」
+- ユーザインストール：「C:\Users\xxxx\AppData\Local\Programs\aozoraeditor」です。
+
 1. 「フォルダ選択」を押して対象のフォルダを指定します。
 2. 品質・サンプリング周波数を指定します。(標準 92kbps, 44100Hz)
 3. 「ファイル変換」を押すと、resources/file/output に変換された m4a ファイルが保存されます。
